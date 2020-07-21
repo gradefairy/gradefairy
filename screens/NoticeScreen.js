@@ -5,6 +5,7 @@ export default function NoticeScreen() {
   return (
     <View style={styles.container}>
       <Text>Notice.js</Text>
+      <Text>branch test!!</Text>
     </View>
   );
 }
