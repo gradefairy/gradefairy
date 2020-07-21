@@ -1,0 +1,10 @@
+# ignore all .expo, .idea file
+.expo/
+.idea/
+
+node_modules/
+web-build/
+bable.config.js/
+
+# ignore package-lock.json
+package-lock.json
