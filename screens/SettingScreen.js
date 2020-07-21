@@ -1,8 +1,9 @@
 import * as React from "react";
-import {View, Text, StyleSheet} from "react-native";
+import {View, Text, StyleSheet, TouchableOpacity, FlatList} from "react-native";
 import NavigationHeader from "../components/NavigationHeader";
 import {SafeAreaView} from "react-navigation";
 import {createStackNavigator} from "@react-navigation/stack";
+import {Ionicons} from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
 
@@ -42,15 +43,50 @@ const SettingLeaveScreen = ({navigation}) => (
   </View>
 );
 
+const settingMenus = [{
+  title: "개인 정보 관리",
+  name: "SettingMypage",
+  icon: "person"
+},{
+  title: "인증 정보 관리",
+  name: "SettingAuth",
+  icon: "lock"
+},{
+  title: "앱 공지사항",
+  name: "SettingNotice",
+  icon: "notifications"
+},{
+  title: "앱 버전 정보",
+  name: "SettingAppVersion",
+  icon: "stats"
+},{
+  title: "자주 묻는 질문",
+  name: "SettingFAQ",
+  icon: "help-circle"
+},{
+  title: "앱 탈퇴하기",
+  name: "SettingLeave",
+  icon: "remove-circle"
+}];
+
 const SettingList = ({navigation}) => (
   <View style={styles.container}>
     <NavigationHeader title={"설정"} />
-    <Text onPress={() => {navigation.navigate("SettingMypage");}}>개인 정보 관리</Text>
-    <Text onPress={() => {navigation.navigate("SettingAuth");}}>인증 정보 관리</Text>
-    <Text onPress={() => {navigation.navigate("SettingNotice");}}>앱 공지사항</Text>
-    <Text onPress={() => {navigation.navigate("SettingAppVersion");}}>앱 버전 정보</Text>
-    <Text onPress={() => {navigation.navigate("SettingFAQ");}}>자주 묻는 질문</Text>
-    <Text onPress={() => {navigation.navigate("SettingLeave");}}>앱 탈퇴하기</Text>
+    <FlatList
+      data={settingMenus}
+      renderItem={({item}) => {
+        return (
+          <TouchableOpacity
+            style={styles.menu}
+            onPress={() => {
+              navigation.navigate(item.name);
+            }}>
+            <Ionicons name={`ios-${item.icon}`} size={20} style={styles.icon} />
+            <Text>{item.title}</Text>
+          </TouchableOpacity>
+        );
+      }}
+      keyExtractor={(item, index) => index} />
   </View>
 );
 
@@ -76,5 +112,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+  },
+  menu: {
+    height: 50,
+    alignItems: "center",
+    paddingLeft: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+    flexDirection: "row"
+  },
+  icon: {
+    marginRight: 15
   }
 });
