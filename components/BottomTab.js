@@ -13,7 +13,7 @@ export default function BottomTab() {
   return (
     <View style={styles.container}>
       <Tab.Navigator
-        initialRouteName={"SettingScreen"}
+        initialRouteName={"HomeScreen"}
         tabBarOptions={{
           showLabel: false,
           activeTintColor: "#675CF6",

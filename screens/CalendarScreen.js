@@ -1,13 +1,9 @@
-// !IMPORTANT
-// npm i react-native-modal
-// npm i react-native-calendars
-
 import * as React from "react";
 import {View, Text, StyleSheet, TouchableOpacity, Dimensions} from "react-native";
 import Modal from "react-native-modal";
 import {Ionicons} from "@expo/vector-icons";
 import {SafeAreaView} from "react-navigation";
-import {LocaleConfig, Calendar, CalendarList} from "react-native-calendars";
+import {LocaleConfig, CalendarList} from "react-native-calendars";
 
 const {width, height} = Dimensions.get("window");
 

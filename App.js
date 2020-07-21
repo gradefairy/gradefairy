@@ -13,7 +13,7 @@ export default function App() {
     <View style={styles.container}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName={"Tab"}
+          initialRouteName={"SignIn"}
           screenOptions={{
             gestureEnabled: false
           }}

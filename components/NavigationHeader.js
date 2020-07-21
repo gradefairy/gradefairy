@@ -2,9 +2,13 @@ import React from "react";
 import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 
+/* 네비게이션 헤더 생성 */
+/* usage: <NavigationHeader title={"헤더 타이틀"} /> */
+/* usage(+backButton): <NavigationHeader title={"헤더 타이틀"} navigation={navigation object} /> */
 export default function NavigationHeader({title, navigation}) {
   return (
     <View style={styles.container}>
+      {/* back button이 필요한 경우 navigation을 받아야 함 */}
       {(navigation) ?
         (<View style={styles.backBtn}>
         <TouchableOpacity onPress={() => {navigation.goBack();}}>
@@ -12,6 +16,7 @@ export default function NavigationHeader({title, navigation}) {
         </TouchableOpacity>
       </View>) : null
       }
+      {/* 헤더 타이틀 */}
       <Text style={styles.title}>{title}</Text>
     </View>
   );
