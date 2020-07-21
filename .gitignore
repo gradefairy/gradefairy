@@ -1,8 +1,9 @@
 .gitignore
 
-# ignore all .expo, .idea file
+# ignore all .expo, .idea, babel file
 .expo/
 .idea/
+babel*
 
 node_modules/
 web-build/
