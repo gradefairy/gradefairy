@@ -1,5 +1,6 @@
 import * as React from "react";
 import {View, Text, StyleSheet} from "react-native";
+import GlobalStyles from "../styles/GlobalStyles";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/HomeScreen";
 import NoticeScreen from "../screens/NoticeScreen";
@@ -11,7 +12,7 @@ const Tab = createBottomTabNavigator();
 
 export default function BottomTab() {
   return (
-    <View style={styles.container}>
+    <View style={GlobalStyles.container}>
       <Tab.Navigator
         initialRouteName={"Home"}
         tabBarOptions={{
@@ -38,10 +39,3 @@ export default function BottomTab() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white"
-  }
-});
