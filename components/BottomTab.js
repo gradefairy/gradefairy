@@ -1,5 +1,6 @@
 import * as React from "react";
 import {View, Text, StyleSheet} from "react-native";
+import GlobalStyles from "../styles/GlobalStyles";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/HomeScreen";
 import NoticeScreen from "../screens/NoticeScreen";
@@ -11,9 +12,9 @@ const Tab = createBottomTabNavigator();
 
 export default function BottomTab() {
   return (
-    <View style={styles.container}>
+    <View style={GlobalStyles.container}>
       <Tab.Navigator
-        initialRouteName={"HomeScreen"}
+        initialRouteName={"Home"}
         tabBarOptions={{
           showLabel: false,
           activeTintColor: "#675CF6",
@@ -22,26 +23,19 @@ export default function BottomTab() {
         screenOptions={({route}) => ({
           tabBarIcon: ({color, size}) => {
             let iconName;
-            if (route.name == "HomeScreen") iconName = "home";
-            else if(route.name == "NoticeScreen") iconName = "notifications";
-            else if(route.name == "CalendarScreen") iconName = "calendar";
+            if (route.name == "Home") iconName = "home";
+            else if(route.name == "Notice") iconName = "notifications";
+            else if(route.name == "Calendar") iconName = "calendar";
             else iconName = "settings";
 
             return <Ionicons name={`ios-${iconName}`} size={size} color={color} />
           }
         })}>
-        <Tab.Screen name={"HomeScreen"} component={HomeScreen} />
-        <Tab.Screen name={"NoticeScreen"} component={NoticeScreen} />
-        <Tab.Screen name={"CalendarScreen"} component={CalendarScreen} />
-        <Tab.Screen name={"SettingScreen"} component={SettingScreen} />
+        <Tab.Screen name={"Home"} component={HomeScreen} />
+        <Tab.Screen name={"Notice"} component={NoticeScreen} />
+        <Tab.Screen name={"Calendar"} component={CalendarScreen} />
+        <Tab.Screen name={"Setting"} component={SettingScreen} />
       </Tab.Navigator>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white"
-  }
-});
