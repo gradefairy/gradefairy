@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   backBtn: {
     position: "absolute",
     top: 0,
-    left: 10,
+    left: 20,
     height: 50,
     justifyContent: "center"
   },
