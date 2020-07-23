@@ -1,5 +1,6 @@
 import * as React from "react";
-import {View, Text, StyleSheet, Platform} from "react-native";
+import {View, Text, StyleSheet} from "react-native";
+import GlobalStyles from "./styles/GlobalStyles";
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import BottomTab from "./components/BottomTab";
@@ -11,7 +12,7 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={GlobalStyles.safeArea}>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName={"SignIn"}
@@ -31,9 +32,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  safeArea: {
-    flex: 1,
-    paddingTop: Platform.OS === "android" ? 25 : 0
   }
 });
