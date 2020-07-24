@@ -75,7 +75,7 @@ const NoticeList = ({navigation}) => (
             <Text style={[GlobalStyles.tableData, {width: width / 10 * 3}]}>{item.date}</Text>
           </TouchableOpacity>
         )}
-        keyExtractor={(item, index) => index}/>
+        keyExtractor={(item, index) => `${index}`}/>
     </ScrollView>
   </View>
 );
