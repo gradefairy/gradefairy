@@ -11,7 +11,9 @@ export default function NavigationHeader({title, navigation}) {
       {/* back button이 필요한 경우 navigation을 받아야 함 */}
       {(navigation) ?
         (<View style={styles.backBtn}>
-        <TouchableOpacity onPress={() => {navigation.goBack();}}>
+        <TouchableOpacity
+          hitSlop={{top: 10, bottom: 10, left: 20, right: 20}}
+          onPress={() => {navigation.goBack();}}>
           <Ionicons name={"ios-arrow-back"} size={24} />
         </TouchableOpacity>
       </View>) : null
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
   backBtn: {
     position: "absolute",
     top: 0,
-    left: 10,
+    left: 20,
     height: 50,
     justifyContent: "center"
   },
