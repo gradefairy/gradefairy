@@ -23,7 +23,9 @@ export default function NoticeSearchScreen({navigation}) {
           <Ionicons name={"ios-search"} size={24} color={"#888"} />
         </TouchableOpacity>
       </View>
+      {/* 여기서부터 공지 검색 레이아웃 */}
       <Text>NoticeSearchScreen.js</Text>
+      {/* 여기까지 공지 검색 레이아웃 */}
     </View>
   );
 }
