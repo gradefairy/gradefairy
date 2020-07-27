@@ -37,7 +37,36 @@ const noticeList = [{
   type: "학사",
   title: "2020-군e러닝1학기 성적처리 행정",
   date: "2020-07-02"
-}];
+}, {
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},{
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},{
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},{
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},{
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},{
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},{
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},
+];
 /* 여기까지 공지 리스트 데이터 */
 
 const width = Dimensions.get("window").width;
@@ -58,6 +87,7 @@ const NoticeList = ({navigation}) => (
       </TouchableOpacity>
     </View>
     {/* 여기서부터 공지 리스트 레이아웃 */}
+    {/* TODO: 스크롤 내렸을 때 header fixed되게 하기 */}
     <ScrollView style={GlobalStyles.tableContainer}>
       <View style={GlobalStyles.tableHeaderContainer}>
         <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 2}]}>분류</Text>

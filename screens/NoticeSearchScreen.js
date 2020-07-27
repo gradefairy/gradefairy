@@ -1,7 +1,7 @@
 import React from "react";
 import {View, Text, StyleSheet, TouchableOpacity, TextInput, Dimensions} from "react-native";
 import GlobalStyles from "../styles/GlobalStyles";
-import {Ionicons} from "@expo/vector-icons";
+import {Ionicons, Entypo} from "@expo/vector-icons";
 
 const width = Dimensions.get("window").width;
 
@@ -24,7 +24,24 @@ export default function NoticeSearchScreen({navigation}) {
         </TouchableOpacity>
       </View>
       {/* 여기서부터 공지 검색 레이아웃 */}
-      <Text>NoticeSearchScreen.js</Text>
+      <View style={styles.searchItems}>
+        <View style={styles.searchItem}>
+          <Entypo name="back-in-time" size={24} color="#ccc" style={styles.search_icon} />
+          <Text style={styles.search_Text}>대회</Text>
+        </View>
+        <View style={styles.searchItem}>
+          <Entypo name="back-in-time" size={24} color="#ccc" style={styles.search_icon} />
+          <Text style={styles.search_Text}>동아리</Text>
+        </View>
+        <View style={styles.searchItem}>
+          <Entypo name="back-in-time" size={24} color="#ccc" style={styles.search_icon} />
+          <Text style={styles.search_Text}>기숙사</Text>
+        </View>
+        <View style={styles.searchItem}>
+          <Entypo name="back-in-time" size={24} color="#ccc" style={styles.search_icon} />
+          <Text style={styles.search_Text}>장학</Text>
+        </View>
+      </View>
       {/* 여기까지 공지 검색 레이아웃 */}
     </View>
   );
@@ -32,7 +49,8 @@ export default function NoticeSearchScreen({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    alignItems:"center",
   },
   searchBarContainer: {
     backgroundColor: "white",
@@ -55,5 +73,28 @@ const styles = StyleSheet.create({
   searchTextInput: {
     width: width - 40 - 40 - 40 - 10,
     marginHorizontal: 5
+  },
+  searchItems:{
+    width:"95%",
+    justifyContent:"center",
+    alignItems: "center",
+  },
+  searchItem:{
+    width:"95%",
+    height:45,
+    position:"relative",
+    flexDirection: "row",
+    justifyContent:"flex-start",
+    alignItems: "center",
+    // borderBottomWidth: 1,
+    // borderBottomColor: "#ddd",
+  },
+  search_icon:{
+    width: "15%",
+  },
+  search_Text:{
+    fontSize:17,
+    width: "80%",
+    color:"gray",
   }
 });
