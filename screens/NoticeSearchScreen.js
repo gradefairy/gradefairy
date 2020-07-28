@@ -13,13 +13,14 @@ export default function NoticeSearchScreen({navigation}) {
           onPress={() => {
             navigation.goBack();
           }}
+          hitSlop={{top:32, bottom:32, right:32}}
           style={styles.backBtn}>
           <Ionicons name={"ios-arrow-back"} size={24} color={"#888"} />
         </TouchableOpacity>
         <TextInput
           placeholder={"Search"}
           style={styles.searchTextInput} />
-        <TouchableOpacity style={styles.searchBtn}>
+        <TouchableOpacity hitSlop={{top:32, bottom:32, right:32}} style={styles.searchBtn}>
           <Ionicons name={"ios-search"} size={24} color={"#888"} />
         </TouchableOpacity>
       </View>
