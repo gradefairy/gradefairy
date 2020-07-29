@@ -1,10 +1,9 @@
 import React from "react";
-import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
+import {View, Text, TouchableOpacity, StyleSheet, FlatList} from "react-native";
 import GlobalStyles from "../styles/GlobalStyles";
 import NavigationHeader from "../components/NavigationHeader";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { FlatList } from "react-native-gesture-handler";
 
 export default class NoticeFilterScreen extends React.Component{
   state = {
@@ -65,36 +64,31 @@ export default class NoticeFilterScreen extends React.Component{
       <View style={GlobalStyles.container}>
         <NavigationHeader title={"맞춤 공지 설정"} navigation={this.props.navigation} />
         {/* 여기서부터 맞춤 공지 레이아웃 */}
-        <View style={styles.wrapper}>
+        <TouchableOpacity style={styles.wrapper} onPress={this._onCollege} activeOpacity={0.8}>
           <Text style={styles.inner_text}>학사/장학 공지</Text>
-          <TouchableOpacity onPress={this._onCollege}>
-            <MaterialCommunityIcons name={this.state.on_college? "toggle-switch": "toggle-switch-off-outline"} size={40} color="black" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.wrapper}>
+          <MaterialCommunityIcons name={this.state.on_college? "toggle-switch": "toggle-switch-off-outline"} size={40} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.wrapper} onPress={this._onDormitory} activeOpacity={0.8}>
           <Text style={styles.inner_text}>기숙사 공지</Text>
-          <TouchableOpacity onPress={this._onDormitory}>
-            <MaterialCommunityIcons name={this.state.on_dormitory? "toggle-switch": "toggle-switch-off-outline"} size={40} color="black" />
-          </TouchableOpacity>
-        </View>
+          <MaterialCommunityIcons name={this.state.on_dormitory? "toggle-switch": "toggle-switch-off-outline"} size={40} color="black" />
+        </TouchableOpacity>
         {/* 아코디언 메뉴 */}
-        <View style={this.state.isFolding? [styles.wrapper, {backgroundColor:"#ddd"}] : styles.wrapper}>
+        <TouchableOpacity 
+            style={this.state.isFolding? [styles.wrapper, {backgroundColor:"#ddd"}] : styles.wrapper}
+            onPress={this._changeFolding} 
+            activeOpacity={0.8}>
           <Text style={styles.inner_text}>학과(학부) 공지</Text>
-          <TouchableOpacity onPress={this._changeFolding}>
-            <AntDesign name={this.state.isFolding? "up": "down"} size={25} color="black" />
-          </TouchableOpacity>
-        </View>
+          <AntDesign name={this.state.isFolding? "up": "down"} size={25} color="black" />
+        </TouchableOpacity>
         {this.state.isFolding ?
           <View style={styles.folding_true}>
               <FlatList
                 data={this.state.majors}
                 renderItem={({item}) => (
-                  <View style={styles.wrapper}>
+                  <TouchableOpacity style={styles.wrapper} onPress={()=>this._changeChoose(item.id)} activeOpacity={0.8}>
                     <Text style={styles.inner_text}>{item.content}</Text>
-                    <TouchableOpacity onPress={()=>this._changeChoose(item.id)}>
-                      <MaterialCommunityIcons name={item.choose? "toggle-switch": "toggle-switch-off-outline"} size={40} color="black" />
-                    </TouchableOpacity>
-                  </View>
+                    <MaterialCommunityIcons name={item.choose? "toggle-switch": "toggle-switch-off-outline"} size={40} color="black" />
+                  </TouchableOpacity>
                 )}
                 keyExtractor={(item)=> item.id.toString()}/>
           </View>
