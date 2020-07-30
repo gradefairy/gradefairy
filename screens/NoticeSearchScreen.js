@@ -1,25 +1,51 @@
 import React from "react";
-import {View, Text, StyleSheet, TouchableOpacity, TextInput, Dimensions} from "react-native";
+import {View, Text, StyleSheet, TouchableOpacity, TextInput, Dimensions, AsyncStorage} from "react-native";
 import GlobalStyles from "../styles/GlobalStyles";
 import {Ionicons, Entypo} from "@expo/vector-icons";
 import { FlatList } from "react-native-gesture-handler";
+import { MaterialIcons } from '@expo/vector-icons';
 
 const width = Dimensions.get("window").width;
 
 export default class NoticeSearchScreen extends React.Component {
   state = {
     inputValue: "",
-    record : ["대회", "기숙사", "장학"]
+    record : []
+  }
+
+  componentWillMount() {
+    this.getData()
+  }
+
+  storeData = () => {
+    AsyncStorage.setItem('@search:state', JSON.stringify(this.state));
+  }
+
+  getData = () => {
+      AsyncStorage.getItem('@search:state').then((state) => {
+          if(state != null){
+              this.setState(JSON.parse(state));
+              this.setState({inputValue:""});
+          }
+      })
   }
 
   _changeText = (value) => {
-    this.setState({inputValue: value});
+    this.setState({inputValue: value}, this.storeData);
   }
 
   _addRecord = () => {
-    const prevRecord = this.state.record;
-    const newRecord = this.state.inputValue;
-    this.setState({record: prevRecord.concat(newRecord), inputValue:""});
+    if (this.state.inputValue != "") {
+      const prevRecord = this.state.record;
+      const newRecord = this.state.inputValue;
+      this.setState({record: prevRecord.concat(newRecord), inputValue:""}, this.storeData);
+    }
+  }
+
+  _deleteItem = (index) => {
+    const newRecord = this.state.record;
+    newRecord.splice(index, 1);
+    this.setState({record: newRecord}, this.storeData);
   }
 
   render() {
@@ -39,11 +65,11 @@ export default class NoticeSearchScreen extends React.Component {
             placeholder={"Search"}
             style={styles.searchTextInput}
             onChangeText={this._changeText}
-            onEndEditing={this._addRecord} />
+            returnKeyType={"done"} />
           <TouchableOpacity 
             hitSlop={{top:32, bottom:32, right:32}} 
             style={styles.searchBtn}
-            onPress={() => this._addRecord}>
+            onPress={() => this._addRecord(this.state.inputValue)}>
             <Ionicons name={"ios-search"} size={24} color={"#888"} />
           </TouchableOpacity>
         </View>
@@ -51,10 +77,19 @@ export default class NoticeSearchScreen extends React.Component {
         <View style={styles.searchItems}>
           <FlatList
             data={this.state.record}
-            renderItem={({item}) => (
+            renderItem={({item, index}) => (
               <View style={styles.searchItem}>
-                  <Entypo name="back-in-time" size={24} color="#ccc" style={styles.item_icon} />
-                  <Text style={styles.search_Text}>{item}</Text>
+                  <View style={styles.iconNText}>
+                    <Entypo name="back-in-time" size={24} color="#ccc" style={styles.item_icon} />
+                    <Text style={styles.search_Text}>{item}</Text>
+                  </View>
+                  <TouchableOpacity 
+                    style={styles.item_icon_delete}
+                    onPress={() => this._deleteItem(index)}
+                    hitSlop={{top:30, bottom:30, right:30}}
+                    activeOpacity={0.8}>
+                    <MaterialIcons name="delete" size={24} color="#ccc" />
+                  </TouchableOpacity>
               </View>
             )}
             keyExtractor={(item, index) => String(index)}
@@ -100,15 +135,21 @@ const styles = StyleSheet.create({
     // backgroundColor:"green"
   },
   searchItem:{
-    width:"100%",
+    position:"relative",
+    width:"80%",
     height:45,
-    // position:"relative",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent:"space-between",
     // backgroundColor:"purple"
 
     // borderBottomWidth: 1,
     // borderBottomColor: "#ddd",
+  },
+  iconNText: {
+    // backgroundColor: "blue",
+    flexDirection: "row",
+    alignItems: "center",
   },
   item_icon:{
     // width: "15%",
@@ -119,5 +160,8 @@ const styles = StyleSheet.create({
     fontSize:17,
     // width: "80%",
     color:"gray",
+  },
+  item_icon_delete: {
+    paddingRight:15,
   }
 });

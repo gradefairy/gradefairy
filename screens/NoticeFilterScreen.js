@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, TouchableOpacity, StyleSheet, FlatList} from "react-native";
+import {View, Text, TouchableOpacity, StyleSheet, FlatList, AsyncStorage} from "react-native";
 import GlobalStyles from "../styles/GlobalStyles";
 import NavigationHeader from "../components/NavigationHeader";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -39,24 +39,41 @@ export default class NoticeFilterScreen extends React.Component{
     ]
   }
 
+  componentWillMount() {
+    this.getData();
+  }
+
+  storeData = () => {
+    AsyncStorage.setItem('@filter:state', JSON.stringify(this.state));
+  }
+
+  getData = () => {
+      AsyncStorage.getItem('@filter:state').then((state) => {
+          if(state != null){
+              this.setState(JSON.parse(state));
+              this.setState({isFolding: false}); // 화면에 다시 들어올 때마다 아코디언 메뉴 접어놓음.
+          }
+      })
+  }
+
   _changeChoose = (id) => {
     const newState = [...this.state.majors];
     // console.log(newState[0]);
     newState[id].choose = !(newState[id].choose);
-    this.setState({filtering:newState});
+    this.setState({filtering:newState}, this.storeData);
   }
 
   _changeFolding = () => {
     const now_folding = this.state.isFolding;
-    this.setState({isFolding: !(now_folding)})
+    this.setState({isFolding: !(now_folding)}, this.storeData);
   }
 
   _onCollege = () => {
-    this.setState({on_college: !(this.state.on_college)})
+    this.setState({on_college: !(this.state.on_college)}, this.storeData);
   }
 
   _onDormitory = () => {
-    this.setState({on_dormitory: !(this.state.on_dormitory)})
+    this.setState({on_dormitory: !(this.state.on_dormitory)}, this.storeData);
   }
 
   render() {
