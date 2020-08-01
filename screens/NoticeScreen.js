@@ -8,7 +8,6 @@ import NoticeFilterScreen from "./NoticeFilterScreen";
 import NoticeViewScreen from "./NoticeViewScreen";
 import {Ionicons} from "@expo/vector-icons";
 
-/* 여기서부터 공지 리스트 데이터 */
 const noticeList = [{
   type: "취업",
   title: "[한국감정원] 제1기 청년 홍보단 모집공고",
@@ -65,8 +64,7 @@ const noticeList = [{
   type: "모집채용",
   title: "한양대학교 산업협력단 아르바이트",
   date: "2020-07-02"
-},
-];
+}];
 /* 여기까지 공지 리스트 데이터 */
 
 const width = Dimensions.get("window").width;
@@ -86,34 +84,35 @@ const NoticeList = ({navigation}) => (
         <Ionicons name={"ios-search"} size={22} />
       </TouchableOpacity>
     </View>
-    {/* 여기서부터 공지 리스트 레이아웃 */}
-    <FlatList
-      data={noticeList}
-      renderItem={({item}) => (
-        <TouchableOpacity
-          activeOpacity={1}
-          style={GlobalStyles.tableDataContainer}
-          onPress={() => {navigation.navigate("NoticeView", item);}}>
-          <Text style={[GlobalStyles.tableData, {width: width / 10 * 2}]}>{item.type}</Text>
-          <Text style={[GlobalStyles.tableData, {width: width / 10 * 5, textAlign: "left"}]}>
-            {(item.title.length > 22) ? `${item.title.substr(0, 22)}...` : item.title}
-          </Text>
-          <Text style={[GlobalStyles.tableData, {width: width / 10 * 3}]}>{item.date}</Text>
-        </TouchableOpacity>
-      )}
-      keyExtractor={(item, index) => `${index}`}
-      ListHeaderComponent={()=>{
-        var stickyHeader = (
-          <View style={[GlobalStyles.tableHeaderContainer, {backgroundColor:"white"}]}>
-            <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 2}]}>분류</Text>
-            <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 5}]}>제목</Text>
-            <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 3}]}>작성일</Text>
-          </View>
-        )
-        return stickyHeader;
-      }}
-      stickyHeaderIndices={[0]}/>
-    {/* 여기까지 공지 리스트 레이아웃 */}
+    <View style={GlobalStyles.tableContainer}>
+      {/* 여기서부터 공지 리스트 레이아웃 */}
+      <FlatList
+        data={noticeList}
+        renderItem={({item}) => (
+          <TouchableOpacity
+            activeOpacity={1}
+            style={GlobalStyles.tableDataContainer}
+            onPress={() => {navigation.navigate("NoticeView", item);}}>
+            <Text style={[GlobalStyles.tableData, {width: width / 10 * 2}]}>{item.type}</Text>
+            <Text style={[GlobalStyles.tableData, {width: width / 10 * 5, textAlign: "left"}]}>
+              {(item.title.length > 22) ? `${item.title.substr(0, 22)}...` : item.title}
+            </Text>
+            <Text style={[GlobalStyles.tableData, {width: width / 10 * 3}]}>{item.date}</Text>
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item, index) => `${index}`}
+        ListHeaderComponent={()=>{
+          return (
+            <View style={[GlobalStyles.tableHeaderContainer, {backgroundColor:"white"}]}>
+              <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 2}]}>분류</Text>
+              <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 5}]}>제목</Text>
+              <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 3}]}>작성일</Text>
+            </View>
+          );
+        }}
+        stickyHeaderIndices={[0]}/>
+      {/* 여기까지 공지 리스트 레이아웃 */}
+    </View>
   </View>
 );
 

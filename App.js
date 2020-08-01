@@ -15,7 +15,7 @@ export default function App() {
     <SafeAreaView style={GlobalStyles.safeArea}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName={"SignIn"}
+          initialRouteName={"Tab"}
           screenOptions={{
             gestureEnabled: false
           }}
