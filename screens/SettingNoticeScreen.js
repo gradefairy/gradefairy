@@ -1,5 +1,6 @@
 import React from "react";
 import {StyleSheet, Text, View, TouchableOpacity, FlatList} from "react-native";
+import GlobalStyles from "../styles/GlobalStyles";
 import NavigationHeader from "../components/NavigationHeader";
 
 const noticeList = [
@@ -19,7 +20,7 @@ export default class SettingNoticeScreen extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={GlobalStyles.container}>
         <NavigationHeader
           title={"앱 공지사항"}
           navigation={this.props.navigation} />
@@ -43,10 +44,6 @@ export default class SettingNoticeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  },
   notice: {
     height: 70,
     alignItems: "flex-start",

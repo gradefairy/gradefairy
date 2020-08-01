@@ -1,7 +1,7 @@
 import * as React from "react";
+import GlobalStyles from "../styles/GlobalStyles";
 import {View, Text, StyleSheet, TouchableOpacity, Alert, FlatList} from "react-native";
 import NavigationHeader from "../components/NavigationHeader";
-import {SafeAreaView} from "react-navigation";
 import {createStackNavigator} from "@react-navigation/stack";
 import {Ionicons} from "@expo/vector-icons";
 import SettingMypageScreen from "./SettingMypageScreen";
@@ -39,7 +39,7 @@ const settingMenu = [{
 }];
 
 const SettingList = ({navigation}) => (
-  <View style={styles.container}>
+  <View style={GlobalStyles.container}>
     <NavigationHeader title={"설정"} />
     {/* 페이지 이동이 필요한 경우 navigation.navigate,
     앱 탈퇴하기의 경우 페이지 이동 대신 Alert 창을 띄우는 것으로 대신
@@ -64,7 +64,7 @@ const SettingList = ({navigation}) => (
 
 export default function SettingScreen() {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={GlobalStyles.container}>
       <Stack.Navigator
         initialRouteName={"SettingList"}
         headerMode={"none"}>
@@ -75,15 +75,11 @@ export default function SettingScreen() {
         <Stack.Screen name={"SettingAppVersion"} component={SettingAppVersionScreen} />
         <Stack.Screen name={"SettingFAQ"} component={SettingFAQScreen} />
       </Stack.Navigator>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  },
   menu: {
     height: 50,
     alignItems: "center",

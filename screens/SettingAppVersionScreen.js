@@ -1,5 +1,6 @@
 import React from "react";
 import {StyleSheet, Text, View} from "react-native";
+import GlobalStyles from "../styles/GlobalStyles";
 import NavigationHeader from "../components/NavigationHeader";
 
 export default class SettingAppVersionScreen extends React.Component {
@@ -8,7 +9,7 @@ export default class SettingAppVersionScreen extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={GlobalStyles.container}>
         <NavigationHeader
           title={"앱 버전 정보"}
           navigation={this.props.navigation} />
@@ -26,18 +27,3 @@ export default class SettingAppVersionScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    paddingHorizontal: 15
-  },
-  title: {
-    fontSize: 17,
-    paddingVertical: 10
-  },
-  contents: {
-    fontSize: 13
-  }
-});

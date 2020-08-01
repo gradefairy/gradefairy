@@ -1,5 +1,6 @@
 import React from "react";
 import {StyleSheet, View, Text, FlatList, TouchableOpacity} from "react-native";
+import GlobalStyles from "../styles/GlobalStyles";
 import NavigationHeader from "../components/NavigationHeader";
 
 const faqList = [
@@ -19,7 +20,7 @@ export default class SettingFAQScreen extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={GlobalStyles.container}>
         <NavigationHeader
           title={"자주 묻는 질문"}
           navigation={this.props.navigation} />
@@ -40,10 +41,6 @@ export default class SettingFAQScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  },
   faq: {
     height: 50,
     alignItems: "center",

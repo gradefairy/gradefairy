@@ -1,4 +1,5 @@
 import React from "react";
+import GlobalStyles from "../styles/GlobalStyles";
 import {StyleSheet, View} from "react-native";
 import NavigationHeader from "../components/NavigationHeader";
 import Input from "../components/InputTab";
@@ -9,7 +10,7 @@ export default class SettingAuthScreen extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={GlobalStyles.container}>
         <NavigationHeader
           title={"인증 정보 관리"}
           navigation={this.props.navigation} />
@@ -21,10 +22,3 @@ export default class SettingAuthScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  }
-});

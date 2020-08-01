@@ -1,5 +1,6 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
+import GlobalStyles from "../styles/GlobalStyles";
 import NavigationHeader from "../components/NavigationHeader";
 import Input from "../components/InputTab";
 
@@ -9,7 +10,7 @@ export default class SettingMypageScreen extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={GlobalStyles.container}>
         <NavigationHeader
           title={"개인 정보 관리"}
           navigation={this.props.navigation} />
@@ -23,10 +24,3 @@ export default class SettingMypageScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  }
-});
