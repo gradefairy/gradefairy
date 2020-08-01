@@ -1,6 +1,7 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
 import NavigationHeader from "../components/NavigationHeader";
+import Input from "../components/InputTab";
 
 export default class SettingAuthScreen extends React.Component {
   constructor(props) {
@@ -13,6 +14,8 @@ export default class SettingAuthScreen extends React.Component {
           title={"인증 정보 관리"}
           navigation={this.props.navigation} />
           {/* 여기서부터 인증 정보 관리 레이아웃 */}
+          <Input />
+          <Input />
           {/* 여기까지 인증 정보 관리 레이아웃 */}
       </View>
     );
