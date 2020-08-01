@@ -1,7 +1,8 @@
 import React from "react";
-import {View, Text} from "react-native";
+import {View, Text, StyleSheet} from "react-native";
 import GlobalStyles from "../styles/GlobalStyles";
 import NavigationHeader from "../components/NavigationHeader";
+
 
 export default class NoticeViewScreen extends React.Component {
   render() {

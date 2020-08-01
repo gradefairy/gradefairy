@@ -36,7 +36,36 @@ const noticeList = [{
   type: "학사",
   title: "2020-군e러닝1학기 성적처리 행정",
   date: "2020-07-02"
+}, {
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},{
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},{
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},{
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},{
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},{
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
+},{
+  type: "모집채용",
+  title: "한양대학교 산업협력단 아르바이트",
+  date: "2020-07-02"
 }];
+/* 여기까지 공지 리스트 데이터 */
 
 const width = Dimensions.get("window").width;
 
@@ -44,12 +73,12 @@ const NoticeList = ({navigation}) => (
   <View style={GlobalStyles.container}>
     <NavigationHeader title={"공지사항"} />
     <View style={styles.iconContainer}>
-      <TouchableOpacity onPress={() => {
+      <TouchableOpacity hitSlop={{top:32, bottom:32, right:32}} onPress={() => {
         navigation.navigate("NoticeFilter");
       }}>
         <Ionicons name={"ios-funnel"} size={20} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
+      <TouchableOpacity hitSlop={{top:32, bottom:32, right:32}} onPress={() => {
         navigation.navigate("NoticeSearch");
       }}>
         <Ionicons name={"ios-search"} size={22} />
@@ -61,6 +90,7 @@ const NoticeList = ({navigation}) => (
         <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 5}]}>제목</Text>
         <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 3}]}>작성일</Text>
       </View>
+      {/* 여기서부터 공지 리스트 레이아웃 */}
       <FlatList
         data={noticeList}
         renderItem={({item}) => (
@@ -75,7 +105,19 @@ const NoticeList = ({navigation}) => (
             <Text style={[GlobalStyles.tableData, {width: width / 10 * 3}]}>{item.date}</Text>
           </TouchableOpacity>
         )}
-        keyExtractor={(item, index) => `${index}`}/>
+        keyExtractor={(item, index) => `${index}`}
+        ListHeaderComponent={()=>{
+          var stickyHeader = (
+            <View style={[GlobalStyles.tableHeaderContainer, {backgroundColor:"white"}]}>
+              <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 2}]}>분류</Text>
+              <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 5}]}>제목</Text>
+              <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 3}]}>작성일</Text>
+            </View>
+          )
+          return stickyHeader;
+        }}
+        stickyHeaderIndices={[0]}/>
+      {/* 여기까지 공지 리스트 레이아웃 */}
     </ScrollView>
   </View>
 );
