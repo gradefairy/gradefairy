@@ -8,7 +8,6 @@ import NoticeFilterScreen from "./NoticeFilterScreen";
 import NoticeViewScreen from "./NoticeViewScreen";
 import {Ionicons} from "@expo/vector-icons";
 
-/* 여기서부터 공지 리스트 데이터 */
 const noticeList = [{
   type: "취업",
   title: "[한국감정원] 제1기 청년 홍보단 모집공고",
@@ -38,7 +37,6 @@ const noticeList = [{
   title: "2020-군e러닝1학기 성적처리 행정",
   date: "2020-07-02"
 }];
-/* 여기까지 공지 리스트 데이터 */
 
 const width = Dimensions.get("window").width;
 
@@ -57,7 +55,6 @@ const NoticeList = ({navigation}) => (
         <Ionicons name={"ios-search"} size={22} />
       </TouchableOpacity>
     </View>
-    {/* 여기서부터 공지 리스트 레이아웃 */}
     <ScrollView style={GlobalStyles.tableContainer}>
       <View style={GlobalStyles.tableHeaderContainer}>
         <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 2}]}>분류</Text>
@@ -80,7 +77,6 @@ const NoticeList = ({navigation}) => (
         )}
         keyExtractor={(item, index) => `${index}`}/>
     </ScrollView>
-    {/* 여기까지 공지 리스트 레이아웃 */}
   </View>
 );
 
