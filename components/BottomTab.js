@@ -14,7 +14,7 @@ export default function BottomTab() {
   return (
     <View style={GlobalStyles.container}>
       <Tab.Navigator
-        initialRouteName={"Home"}
+        initialRouteName={"Calendar"}
         tabBarOptions={{
           showLabel: false,
           activeTintColor: "#675CF6",

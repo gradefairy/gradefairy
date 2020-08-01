@@ -180,29 +180,29 @@ export default class CalendarScreen extends React.Component {
           </View>
           <CalendarList
             /* dot marking 해주는 부분*/
-            // markedDates={{
-            //   '2020-07-12': {dots:[tasks, meeting]},
-            //   '2020-07-17': {marked: true},
-            //   '2020-07-18': {dots:[etc]},
-            // }}
-            // markingType={'multi-dot'}
+            markedDates={{
+              '2020-07-12': {dots:[tasks, meeting]},
+              '2020-07-17': {marked: true},
+              '2020-07-18': {dots:[etc]},
+            }}
+            markingType={'multi-dot'}
             /*이까지 나중에는 일정 날짜 받아서 표시해주기*/
             current={new Date()}
             horizontal={true}
             renderHeader={() => (null)}
             pagingEnabled={true}
-            // onVisibleMonthsChange={(months) => {
-            //   // onVisibleMonthsChange로 state를 변경할 시
-            //   // 달력을 완전히 렌더링하지 못하는 문제가 있어 딜레이 추가
-            //   setTimeout(() => {
-            //     this.setState({
-            //       calendar: {
-            //         year: months[0].year,
-            //         month: months[0].month
-            //       }
-            //     });
-            //   })
-            // }}
+            onVisibleMonthsChange={(months) => {
+              // onVisibleMonthsChange로 state를 변경할 시
+              // 달력을 완전히 렌더링하지 못하는 문제가 있어 딜레이 추가
+              setTimeout(() => {
+                this.setState({
+                  calendar: {
+                    year: months[0].year,
+                    month: months[0].month
+                  }
+                });
+              })
+            }}
           />
           {/* 여기서부터 일정 리스트 */}
           <View style={{marginLeft:20}}>

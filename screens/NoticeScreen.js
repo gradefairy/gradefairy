@@ -84,12 +84,7 @@ const NoticeList = ({navigation}) => (
         <Ionicons name={"ios-search"} size={22} />
       </TouchableOpacity>
     </View>
-    <ScrollView style={GlobalStyles.tableContainer}>
-      <View style={GlobalStyles.tableHeaderContainer}>
-        <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 2}]}>분류</Text>
-        <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 5}]}>제목</Text>
-        <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 3}]}>작성일</Text>
-      </View>
+    <View style={GlobalStyles.tableContainer}>
       {/* 여기서부터 공지 리스트 레이아웃 */}
       <FlatList
         data={noticeList}
@@ -107,18 +102,17 @@ const NoticeList = ({navigation}) => (
         )}
         keyExtractor={(item, index) => `${index}`}
         ListHeaderComponent={()=>{
-          var stickyHeader = (
+          return (
             <View style={[GlobalStyles.tableHeaderContainer, {backgroundColor:"white"}]}>
               <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 2}]}>분류</Text>
               <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 5}]}>제목</Text>
               <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 3}]}>작성일</Text>
             </View>
-          )
-          return stickyHeader;
+          );
         }}
         stickyHeaderIndices={[0]}/>
       {/* 여기까지 공지 리스트 레이아웃 */}
-    </ScrollView>
+    </View>
   </View>
 );
 
