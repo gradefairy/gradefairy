@@ -27,3 +27,13 @@ export default class SettingAppVersionScreen extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 17,
+    paddingVertical: 10
+  },
+  contents: {
+    fontSize: 13
+  }
+});

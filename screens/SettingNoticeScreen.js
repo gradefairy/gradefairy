@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
     paddingBottom: 5
   },
   day: {
-    color: "#ee"
+    color: "#888"
   }
 });

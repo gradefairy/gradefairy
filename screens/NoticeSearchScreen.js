@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     width:"100%",
     height: 50,
+    justifyContent: "center",
     borderRadius: 100,
     marginVertical: 10,
     flexDirection: "row", 

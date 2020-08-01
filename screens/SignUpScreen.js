@@ -22,37 +22,31 @@ export default class SignUpScreen extends React.Component {
            <TextInput
             style={SignInStyles.textInput}
             placeholder='비밀번호 확인'
-          />
+           />
            <TextInput
             style={SignInStyles.textInput}
             placeholder='이름'
           />
           <View>
             <Text
-              style={{fontSize:8, color:'#888888'}}
-            >학점관리요정을 사용하려면 학교인증이 필요합니다.</Text>
+              style={{fontSize:8, color:'#888888'}}>학점관리요정을 사용하려면 학교인증이 필요합니다.</Text>
             <TouchableOpacity
               activeOpacity={0.8}
-              style={SignInStyles.authorization}
-            >
+              style={SignInStyles.authorization}>
               <Text style={{color:'white'}}>한양대학교 학생 인증하기</Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity
             activeOpacity={0.8}
             style={SignInStyles.button}
-          >
-            <Text style={{color:'white'}}
-              onPress={() => {
+            onPress={() => {
               // Tab 으로 갈 수 있는 링크 생성할 것 = 회원가입 완료
               this.props.navigation.navigate("Tab");
-              }}
-            >Sign up</Text>
+            }}>
+            <Text style={{color:'white'}}>Sign up</Text>
           </TouchableOpacity>
         </View>
       </View>
     );
   }
 }
-
-

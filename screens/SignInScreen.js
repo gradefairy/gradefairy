@@ -9,7 +9,6 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 export default class SignInScreen extends React.Component {
-
   render() {
     return (
       <SafeAreaView style={GlobalStyles.container}>
@@ -19,13 +18,13 @@ export default class SignInScreen extends React.Component {
           <TextInput
             style={SignInStyles.textInput}
             placeholder="아이디"
-            paceholderTextColor='#888888'
+            placeholderTextColor='#888888'
             onChangeText={(text)=>this.setState({username:text})}
           />
           <TextInput
             style={SignInStyles.textInput}
             placeholder="비밀번호"
-            paceholderTextColor='#888888'
+            placeholderTextColor='#888888'
             secureTextEntry={true}
           />
           <TouchableOpacity
