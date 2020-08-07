@@ -7,6 +7,15 @@ import {Ionicons} from "@expo/vector-icons";
 import {CalendarList, LocaleConfig} from "react-native-calendars";
 import NavigationHeader from "../components/NavigationHeader";
 
+const {width, height} = Dimensions.get("window");
+const Stack = createStackNavigator();
+
+const ScheduleDetailScreen = () => (
+  <View style={GlobalStyles.container}>
+    <Text>ScheduleDetailScreen</Text>
+  </View>
+);
+
 const UpcomingListModal = ({calendar}) => (
   <Modal
     isVisible={calendar.state.isUpcomingListVisible}
@@ -22,6 +31,8 @@ const UpcomingListModal = ({calendar}) => (
     </View>
   </Modal>
 );
+
+
 
 const ScheduleFormScreen = ({navigation, route}) => {
   return (
