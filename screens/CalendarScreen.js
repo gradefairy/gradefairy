@@ -23,22 +23,6 @@ const UpcomingListModal = ({calendar}) => (
   </Modal>
 );
 
-const UpcomingListModal = ({calendar}) => (
-  <Modal
-    isVisible={calendar.state.isUpcomingListVisible}
-    swipeDirection={"down"}
-    onSwipeComplete={() => calendar.setState({isUpcomingListVisible: !calendar.state.isUpcomingListVisible})}
-    useNativeDriver={true}>
-    <View style={styles.modal}>
-      <View style={styles.modalContainer}>
-        {/* 여기서부터 upcoming list modal */}
-        <Text>UpcomingListModal</Text>
-        {/* 여기까지 upcoming list modal */}
-      </View>
-    </View>
-  </Modal>
-);
-
 const ScheduleFormScreen = ({navigation, route}) => {
   return (
     <View style={GlobalStyles.container}>
