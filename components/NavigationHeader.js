@@ -3,9 +3,10 @@ import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 
 /* 네비게이션 헤더 생성 */
-/* usage: <NavigationHeader title={"헤더 타이틀"} /> */
-/* usage(+backButton): <NavigationHeader title={"헤더 타이틀"} navigation={navigation object} /> */
-export default function NavigationHeader({title, navigation}) {
+/* usage: <NavigationHeader title={HEADER_TITLE} /> */
+/* usage(+backButton): <NavigationHeader title={HEADER_TITLE} navigation={NAVIGATION_OBJECT} /> */
+/* usage(+right component): <NavigationHeader title={HEADER_TITLE} right={RIGHT_COMPONENT} /> */
+export default function NavigationHeader({title, navigation, right}) {
   return (
     <View style={styles.container}>
       {/* back button이 필요한 경우 navigation을 받아야 함 */}
@@ -20,6 +21,12 @@ export default function NavigationHeader({title, navigation}) {
       }
       {/* 헤더 타이틀 */}
       <Text style={styles.title}>{title}</Text>
+      {/* 헤더 우측에 추가해야하는 컴포넌트가 있을시 노출 */}
+      {(right) ?
+        (<View style={styles.right}>
+          {right}
+        </View>) : null
+      }
     </View>
   );
 }
@@ -44,5 +51,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 17
+  },
+  right: {
+    position: "absolute",
+    top: 0,
+    right: 20,
+    height: 50,
+    justifyContent: "center"
   }
 });

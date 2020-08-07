@@ -1,10 +1,11 @@
-import * as React from "react";
-import {View, Text, StyleSheet, TouchableOpacity, FlatList, Alert} from "react-native";
+import React,{useState} from "react";
+import {View, Text, StyleSheet, TouchableOpacity, FlatList, Alert, Dimensions, TextInput, Switch} from "react-native";
 import Modal from "react-native-modal";
 import GlobalStyles from "../styles/GlobalStyles";
 import {createStackNavigator} from "@react-navigation/stack";
 import {Ionicons} from "@expo/vector-icons";
 import {CalendarList, LocaleConfig} from "react-native-calendars";
+import NavigationHeader from "../components/NavigationHeader";
 
 const UpcomingListModal = ({calendar}) => (
   <Modal
@@ -22,17 +23,80 @@ const UpcomingListModal = ({calendar}) => (
   </Modal>
 );
 
-const Stack = createStackNavigator();
-const ScheduleDetailScreen = () => (
-  <View style={GlobalStyles.container}>
-    <Text>ScheduleDetailScreen</Text>
-  </View>
+const UpcomingListModal = ({calendar}) => (
+  <Modal
+    isVisible={calendar.state.isUpcomingListVisible}
+    swipeDirection={"down"}
+    onSwipeComplete={() => calendar.setState({isUpcomingListVisible: !calendar.state.isUpcomingListVisible})}
+    useNativeDriver={true}>
+    <View style={styles.modal}>
+      <View style={styles.modalContainer}>
+        {/* 여기서부터 upcoming list modal */}
+        <Text>UpcomingListModal</Text>
+        {/* 여기까지 upcoming list modal */}
+      </View>
+    </View>
+  </Modal>
 );
-const ScheduleFormScreen = () => (
-  <View style={GlobalStyles.container}>
-    <Text>ScheduleFormScreen</Text>
-  </View>
-);
+
+const ScheduleFormScreen = ({navigation, route}) => {
+  return (
+    <View style={GlobalStyles.container}>
+      <NavigationHeader
+        navigation={navigation}
+        title={"새 일정"}
+        right={
+          <TouchableOpacity hitSlop={{top: 10, right: 10, left: 10, bottom: 10}}>
+            <Text style={styles.saveBtnText}>저장</Text>
+          </TouchableOpacity>
+        }
+      />
+      <View style={styles.formContainer}>
+        <View style={styles.formContent}>
+          <TextInput
+            style={styles.formTitle}
+            placeholder={"제목"}
+          />
+          <View style={styles.formList}>
+            <Text style={styles.formListLabel}>시작일</Text>
+            <Text style={styles.formListText}>8월 2일 (일) 오전 8:00</Text>
+          </View>
+          <View style={styles.formList}>
+            <Text style={styles.formListLabel}>종료일</Text>
+            <Text style={styles.formListText}>오전 9:00</Text>
+          </View>
+          <View style={styles.formList}>
+            <Text style={styles.formListLabel}>카테고리</Text>
+            <View style={[
+              styles.upcomingLabel,
+              { backgroundColor: SCHEDULE_CATEGORY["tasks"].color,
+                marginRight: 0 }
+              ]}>
+              <Text style={styles.upcomingLabelText}>과제</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.formContent}>
+          <View style={styles.formList}>
+            <Ionicons name={"ios-navigate"} style={styles.formListIcon} />
+            <TextInput style={[styles.formListText, styles.formListFullText]} placeholder={"위치"} />
+          </View>
+          <View style={[styles.formList, {justifyContent: "space-between"}]}>
+            <View style={styles.formListAlarmLabel}>
+              <Ionicons name={"ios-notifications"} style={styles.formListIcon} />
+              <Text style={styles.formListAlarmText}>알람 없음</Text>
+            </View>
+            <Switch />
+          </View>
+          <View style={styles.formList}>
+            <Ionicons name={"ios-create"} style={styles.formListIcon} />
+            <TextInput style={[styles.formListText, styles.formListFullText]} placeholder={"메모"} multiline={true} />
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
 
 /*달력 SCHEDULE_CATEGORY color */
 const SCHEDULE_CATEGORY = {
@@ -124,8 +188,12 @@ class CalendarViewScreen extends React.Component {
             {this.state.calendar.year}년 {this.state.calendar.month}월
           </Text>
           <TouchableOpacity>
-            <Ionicons name={"ios-add"} size={24}
-              onPress={() => {this.props.navigation.navigate("ScheduleFormScreen");}}/>
+            <Ionicons
+              name={"ios-add"}
+              size={24}
+              hitSlop={{top: 10, right: 10, left: 10, bottom: 10}}
+              onPress={() => {this.props.navigation.navigate("ScheduleFormScreen", {edit: false});}}
+            />
           </TouchableOpacity>
         </View>
         <CalendarList
@@ -134,7 +202,7 @@ class CalendarViewScreen extends React.Component {
           renderHeader={() => (null)}
           pagingEnabled={true}
           theme={{
-            todayTextColor: '#675CF6',
+            todayTextColor: '#675cf6',
           }}
           markingType={"multi-dot"}
           markedDates={{
@@ -189,9 +257,7 @@ export default function CalendarScreen() {
         headerMode={"none"}>
         <Stack.Screen name={"ScheduleDetailScreen"} component={ScheduleDetailScreen} />
         <Stack.Screen name={"ScheduleFormScreen"} component={ScheduleFormScreen} />
-        <Stack.Screen
-          name={"CalendarViewScreen"}
-          component={CalendarViewScreen} />
+        <Stack.Screen name={"CalendarViewScreen"} component={CalendarViewScreen} />
       </Stack.Navigator>
     </View>
   );
@@ -252,5 +318,52 @@ const styles = StyleSheet.create({
     width: "85%",
     height: "70%",
     borderRadius: 10
+  },
+  formContainer: {
+    flex: 1,
+    backgroundColor: "#f5f5f5"
+  },
+  formContent: {
+    padding: 20,
+    backgroundColor: "white",
+    marginBottom: 20
+  },
+  formTitle: {
+    fontSize: 26,
+    height: 45
+  },
+  formList: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: 45,
+    alignItems: "center",
+    paddingLeft: 5
+  },
+  formListLabel: {
+    fontSize: 16,
+    color: "#888"
+  },
+  formListIcon: {
+    color: "#aaa",
+    fontSize: 18
+  },
+  formListText: {
+    fontSize: 16
+  },
+  formListFullText: {
+    width: width - 70
+  },
+  saveBtnText: {
+    color: "#675CF6",
+    fontSize: 18
+  },
+  formListAlarmLabel: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  formListAlarmText: {
+    marginLeft: 13,
+    fontSize: 16,
+    color: "#ccc"
   }
 });
