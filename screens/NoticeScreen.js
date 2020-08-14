@@ -84,35 +84,33 @@ const NoticeList = ({navigation}) => (
         <Ionicons name={"ios-search"} size={22} />
       </TouchableOpacity>
     </View>
-    <View style={GlobalStyles.tableContainer}>
-      {/* 여기서부터 공지 리스트 레이아웃 */}
-      <FlatList
-        data={noticeList}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            activeOpacity={1}
-            style={GlobalStyles.tableDataContainer}
-            onPress={() => {navigation.navigate("NoticeView", item);}}>
-            <Text style={[GlobalStyles.tableData, {width: width / 10 * 2}]}>{item.type}</Text>
-            <Text style={[GlobalStyles.tableData, {width: width / 10 * 5, textAlign: "left"}]}>
-              {(item.title.length > 22) ? `${item.title.substr(0, 22)}...` : item.title}
-            </Text>
-            <Text style={[GlobalStyles.tableData, {width: width / 10 * 3}]}>{item.date}</Text>
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item, index) => `${index}`}
-        ListHeaderComponent={()=>{
-          return (
-            <View style={[GlobalStyles.tableHeaderContainer, {backgroundColor:"white"}]}>
-              <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 2}]}>분류</Text>
-              <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 5}]}>제목</Text>
-              <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 3}]}>작성일</Text>
-            </View>
-          );
-        }}
-        stickyHeaderIndices={[0]}/>
-      {/* 여기까지 공지 리스트 레이아웃 */}
-    </View>
+    {/* 여기서부터 공지 리스트 레이아웃 */}
+    <FlatList
+      data={noticeList}
+      renderItem={({item}) => (
+        <TouchableOpacity
+          activeOpacity={0.6}
+          style={GlobalStyles.tableDataContainer}
+          onPress={() => {navigation.navigate("NoticeView", item);}}>
+          <Text style={[GlobalStyles.tableData, {width: width / 10 * 2}]}>{item.type}</Text>
+          <Text style={[GlobalStyles.tableData, {width: width / 10 * 5, textAlign: "left"}]}>
+            {(item.title.length > 22) ? `${item.title.substr(0, 22)}...` : item.title}
+          </Text>
+          <Text style={[GlobalStyles.tableData, {width: width / 10 * 3}]}>{item.date}</Text>
+        </TouchableOpacity>
+      )}
+      keyExtractor={(item, index) => `${index}`}
+      ListHeaderComponent={()=>{
+        return (
+          <View style={[GlobalStyles.tableHeaderContainer, {backgroundColor:"white"}]}>
+            <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 2}]}>분류</Text>
+            <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 5}]}>제목</Text>
+            <Text style={[GlobalStyles.tableHeader, {width: width / 10 * 3}]}>작성일</Text>
+          </View>
+        );
+      }}
+      stickyHeaderIndices={[0]}/>
+    {/* 여기까지 공지 리스트 레이아웃 */}
   </View>
 );
 

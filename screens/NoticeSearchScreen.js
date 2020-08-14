@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 100,
     marginVertical: 10,
-    flexDirection: "row",
+    flexDirection: "row", 
     alignItems: "center",
     paddingHorizontal: 20
   },
@@ -148,35 +148,4 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   deleteBtn: {}
-  // searchItem:{
-  //   width: "100%",
-  //   height:45,
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   justifyContent:"space-between",
-  //   backgroundColor:"purple"
-
-    // borderBottomWidth: 1,
-    // borderBottomColor: "#ddd",
-  // },
-  // iconNText: {
-  //   backgroundColor: "blue",
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  // },
-  // item_icon:{
-  //   backgroundColor: "red",
-  //   // width: "15%",
-  //   marginRight:20,
-  //   marginLeft:20
-  // },
-  // search_Text:{
-  //   fontSize:17,
-  //   // width: "80%",
-  //   color:"gray",
-  // },
-  // item_icon_delete: {
-  //   paddingRight:15,
-  //   backgroundColor: "yellow"
-  // }
 });
