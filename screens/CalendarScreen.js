@@ -6,15 +6,39 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {Ionicons} from "@expo/vector-icons";
 import {CalendarList, LocaleConfig} from "react-native-calendars";
 import NavigationHeader from "../components/NavigationHeader";
+import ScheduleDetail from "./ScheduleDetailScreen";
+import SelectedDateList from "./ScheduleSelectedDateScreen"
 
 const {width, height} = Dimensions.get("window");
 const Stack = createStackNavigator();
 
-const ScheduleDetailScreen = () => (
+const ScheduleDetailScreen = ({navigation,route}) => (
   <View style={GlobalStyles.container}>
-    <Text>ScheduleDetailScreen</Text>
+    <NavigationHeader
+        navigation={navigation}
+        title={"일정 자세히 보기"}
+        right={
+          <TouchableOpacity
+            hitSlop={{top: 10, right: 10, left: 10, bottom: 10}}>
+            <Text style={styles.saveBtnText}>수정</Text>
+          </TouchableOpacity>
+        }
+      />
+    <ScheduleDetail />
   </View>
 );
+
+// const ScheduleSelectedDateScreen = ({calendar,navigation,route}) => (
+//   <View style={GlobalStyles.container}>
+//     <NavigationHeader
+//         navigation={navigation}
+//         title={"오늘의 할 일"}
+//       />
+//     <SelectedDateList/>
+//     {/*<Text>ScheduleDetailScreen</Text>*/}
+//   </View>
+// );
+
 
 const UpcomingListModal = ({calendar}) => (
   <Modal
@@ -25,14 +49,12 @@ const UpcomingListModal = ({calendar}) => (
     <View style={styles.modal}>
       <View style={styles.modalContainer}>
         {/* 여기서부터 upcoming list modal */}
-        <Text>UpcomingListModal</Text>
+        <SelectedDateList/>
         {/* 여기까지 upcoming list modal */}
       </View>
     </View>
   </Modal>
 );
-
-
 
 const ScheduleFormScreen = ({navigation, route}) => {
   return (
@@ -350,7 +372,7 @@ const styles = StyleSheet.create({
   },
   saveBtnText: {
     color: "#675CF6",
-    fontSize: 18
+    fontSize: 18,
   },
   formListAlarmLabel: {
     flexDirection: "row",
