@@ -11,10 +11,46 @@ const DEVICE_HEIGHT = Dimensions.get('window').height;
 export default class SignInScreen extends React.Component {
   state = {
     id: "",
-    pw: ""
+    pw: "",
+    isLogin: false
   };
 
+  async login(id, pw) {
+    if(id == "") {
+      console.error("no id");
+      return Alert.alert("아이디를 입력하세요.");
+    } else if(pw == "") {
+      console.error("no password");
+      return Alert.alert("비밀번호를 입력하세요.");
+    }
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": 'application/x-www-form-urlencoded; charset=utf-8',
+      },
+      body: `id=${id}&pw=${pw}`
+    };
+
+    try {
+      const response = await fetch("http://127.0.0.1:3000/profile/login", requestOptions);
+      const json = await response.json();
+
+      if(json.code == 200) {
+        this.setState({isLogin: true});
+      }
+    } catch(error) {
+      return console.error(error);
+    }
+
+    return;
+  }
+
   render() {
+    if(this.state.isLogin) {
+      this.props.navigation.navigate("Tab");
+    }
+
     return (
       <SafeAreaView style={GlobalStyles.container}>
         {/* 여기서부터 Sign In 레이아웃 */}
@@ -34,27 +70,27 @@ export default class SignInScreen extends React.Component {
             onChangeText={(pw) => this.setState({pw: pw})}
           />
           <TouchableOpacity
-            onPress={() => {
-              // 공백 제거
-              const id = this.state.id.trim();
-              const pw = this.state.pw.trim();
+            onPress={async() => {
+              // const id = this.state.id;
+              // const pw = this.state.pw;
+              //
+              // const requestOptions = {
+              //   method: "POST",
+              //   headers: {
+              //     "Content-Type": 'application/x-www-form-urlencoded; charset=utf-8',
+              //   },
+              //   body: `id=${id}&pw=${pw}`
+              // };
+              //
+              // try {
+              //   const response = await fetch("http://127.0.0.1:3000/profile/login", requestOptions);
+              //   const json = await response.json();
+              //   this.setState({isLogin: true});
+              // } catch(error) {
+              //   console.error(error);
+              // }
 
-              if(id == "") {
-                Alert.alert("아이디를 입력하세요.");
-                return false;
-              } else if(pw == "") {
-                Alert.alert("비밀번호를 입력하세요.");
-                return false;
-              }
-
-              /*로그인 루틴
-              POST to /profile/login (parameter: {id: id, pw: pw}) {
-                if(success) {
-                  this.props.navigation.navigate("Tab");
-                } else {
-                  Alert.alert("아이디 또는 비밀번호가 올바르지 않습니다.");
-                }
-              }*/
+              await this.login(this.state.id.trim(), this.state.pw.trim());
             }}
             activeOpacity={0.8}
             hitSlop={{top:15,bottom: 15, left: 15, right: 15}}
